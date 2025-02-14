@@ -1,79 +1,49 @@
-# diagrama-funeraria
+# diagrama-pagina-de-link-whitelabel
 
 ```mermaid
 classDiagram
-    class Usuário {
-        int id
-        String nome
-        String email
-        String senha
-        Role role
-        cadastrar()
-        visualizar()
-        editar()
-        deletar()
+    class User {
+        +UUID id
+        +String name
+        +String email
+        +String password
+        +createPage()
+        +updatePage()
+        +deletePage()
     }
 
-    class Role {
-        int id
-        String nome
-        cadastrar()
-        visualizar()
-        editar()
-        deletar()
+    class Page {
+        +UUID id
+        +String title
+        +String description
+        +UUID userId
+        +UUID customizationId
+        +addLink()
+        +removeLink()
+        +updateStyle()
     }
 
-    class Pagamento {
-        int id
-        float valor
-        Date data_pagamento
-        String status
-        visualizar_pagamento()
-        atualizar_pagamento()
+    class Link {
+        +UUID id
+        +String url
+        +String text
+        +UUID pageId
+        +editLink()
+        +deleteLink()
     }
 
-    class MétodoDePagamento {
-        int id
-        String tipo
-        realizar_pagamento()
+    class Customization {
+        +UUID id
+        +String backgroundColor
+        +Int titleFontSize
+        +String titleFontColor
+        +Int descriptionFontSize
+        +String descriptionFontColor
+        +String borderStyle
+        +applyChanges()
     }
 
-    class CobrançaAutomática {
-        int id
-        float valor
-        Date data_vencimento
-        cobrar_cartao_credito()
-    }
+    User "1" --> "*" Page
+    Page "1" --> "*" Link
+    Page "1" --> "1" Customization
 
-    class Cobrança {
-        int id
-        float valor
-        Date data_vencimento
-        enviar_email_cobranca()
-        mostrar_cobranca_usuario()
-    }
-
-    class Plano {
-        int id
-        String nome
-        String descricao
-        float preco
-        List~Foto~ fotos
-        cadastrar_foto()
-        editar_foto()
-        deletar_foto()
-    }
-
-    class Foto {
-        int id
-        String url
-        String descricao
-        adicionar_foto()
-        deletar_foto()
-    }
-
-    Usuário --> Role : "1"
-    Usuário --> Pagamento : "1..*"
-    Pagamento --> MétodoDePagamento : "1"
-    Plano --> Foto : "1..*"
-    CobrançaAutomática --> Pagamento : "1"
