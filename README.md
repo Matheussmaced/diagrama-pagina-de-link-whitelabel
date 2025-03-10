@@ -2,48 +2,55 @@
 
 ```mermaid
 classDiagram
-    class User {
-        +UUID id
-        +String name
+   classDiagram
+    class Usuario {
+        +String id
+        +String nome
         +String email
-        +String password
-        +createPage()
-        +updatePage()
-        +deletePage()
+        +String senha
+        +String cpf
+        +String rg
     }
 
-    class Page {
-        +UUID id
-        +String title
-        +String description
-        +UUID userId
-        +UUID customizationId
-        +addLink()
-        +removeLink()
-        +updateStyle()
+    class Cliente {
+        +String id
+        +String nome
+        +String cpf
+        +String rg
+        +String telefone
     }
 
-    class Link {
-        +UUID id
-        +String url
-        +String text
-        +UUID pageId
-        +editLink()
-        +deleteLink()
+    class Financeiro {
+        +String id
+        +double saldo
+        +void registrarDespesa(double valor, String descricao)
+        +void registrarReceita(double valor, String descricao)
     }
 
-    class Customization {
-        +UUID id
-        +String backgroundColor
-        +Int titleFontSize
-        +String titleFontColor
-        +Int descriptionFontSize
-        +String descriptionFontColor
-        +String borderStyle
-        +applyChanges()
+    class Despesa {
+        +String id
+        +double valor
+        +String descricao
+        +Date data
     }
 
-    User "1" --> "*" Page
-    Page "1" --> "*" Link
-    Page "1" --> "1" Customization
+    class Receita {
+        +String id
+        +double valor
+        +String descricao
+        +Date data
+    }
+
+    class Horario {
+        +String id
+        +Date data
+        +String descricao
+        +double horasTrabalhadas
+    }
+
+    Usuario --> Cliente : pode cadastrar
+    Cliente "1" --> "0..*" Horario : tem registros de horário
+    Financeiro "1" --> "0..*" Despesa : tem despesas
+    Financeiro "1" --> "0..*" Receita : tem receitas
+
 
