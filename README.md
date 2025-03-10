@@ -1,8 +1,5 @@
-# diagrama-pagina-de-link-whitelabel
-
 ```mermaid
 classDiagram
-   classDiagram
     class Usuario {
         +String id
         +String nome
@@ -52,5 +49,3 @@ classDiagram
     Cliente "1" --> "0..*" Horario : tem registros de horário
     Financeiro "1" --> "0..*" Despesa : tem despesas
     Financeiro "1" --> "0..*" Receita : tem receitas
-
-
